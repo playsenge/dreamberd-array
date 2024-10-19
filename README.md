@@ -13,6 +13,8 @@ pip install dreamberd-array
 
 ## Usage
 ```python
+from dreamberd_array import DreamBerdArray
+
 array = DreamBerdArray([1, 2, 3, 4])
 
 print(array[-1]) # 1
