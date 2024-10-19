@@ -16,24 +16,26 @@ class DreamBerdArray:
         if not (-1 <= index <= len(self) - 2):
             raise IndexError(f"Index {index} out of range")
         return self.dict[index]
-    
+
     def __setitem__(self, index: int | float, value: Any) -> None:
         if not (isinstance(index, int) or isinstance(index, float)):
             raise TypeError("Index must be an integer or float")
         if not (-1 <= index <= len(self) - 2):
             raise IndexError(f"Index {index} out of range")
         self.dict[index] = value
-        self.dict = dict(sorted(self.dict.items()))  # Who cares about performance anyway?
+        self.dict = dict(
+            sorted(self.dict.items())
+        )  # Who cares about performance anyway?
 
     def __len__(self) -> int:
         return len(self.dict)
-    
+
     def __str__(self) -> str:
         return str(self.__to_list())
-    
+
     def __repr__(self) -> str:
         return repr(self.__to_list())
-    
+
     def __delitem__(self, index: int) -> None:
         del self.dict[index]
 
@@ -45,20 +47,21 @@ class DreamBerdArray:
 
     def __reversed__(self) -> Any:
         return reversed(self.__to_list())
-    
+
     def append(self, item: Any) -> None:
         self.dict[len(self)] = item
 
     def __eq__(self, other):
         if not isinstance(other, DreamBerdArray):
             return False
-        
+
         # Not exactly correct (can be different indexes and still equal)
         # but DreamBerd is just like JavaScript so == is always wrong
-        return self.__to_list() == other.__to_list()  
+        return self.__to_list() == other.__to_list()
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
 
 class TestDreamBerdArray(unittest.TestCase):
     def setUp(self):
@@ -73,5 +76,6 @@ class TestDreamBerdArray(unittest.TestCase):
         self.array[0.5] = 4
         self.assertEqual(self.array, DreamBerdArray([3, 2, 4, 5]))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
